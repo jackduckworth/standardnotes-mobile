@@ -118,7 +118,8 @@ export const StyledTextView = React.memo(
       newProps.keyboardDismissMode !== prevProps.keyboardDismissMode ||
       newProps.keyboardAppearance !== prevProps.keyboardAppearance ||
       newProps.testID !== prevProps.testID ||
-      newProps.multiline !== prevProps.multiline
+      newProps.multiline !== prevProps.multiline ||
+      newProps.monospace !== prevProps.monospace
     ) {
       return false;
     }

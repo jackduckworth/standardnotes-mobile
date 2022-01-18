@@ -22,6 +22,9 @@ export const PreferencesSection = () => {
   const [hideDates, setHideDates] = useState<boolean>(() =>
     application!.getLocalPreferences().getValue(PrefKey.NotesHideDate, false)
   );
+  const [useMonospace, setMonospace] = useState<boolean>(() =>
+    application!.getLocalPreferences().getValue(PrefKey.NoteUseMonospace, false)
+  );
   const [hidePreviews, setHidePreviews] = useState<boolean>(() =>
     application!
       .getLocalPreferences()
@@ -60,6 +63,12 @@ export const PreferencesSection = () => {
       ?.getLocalPreferences()
       .setUserPrefValue(PrefKey.NotesHideDate, !hideDates);
     setHideDates(value => !value);
+  };
+  const toggleNoteMonospaceFont = () => {
+    application
+      ?.getLocalPreferences()
+      .setUserPrefValue(PrefKey.NoteUseMonospace, !useMonospace);
+    setMonospace(value => !value);
   };
 
   return (
@@ -104,6 +113,18 @@ export const PreferencesSection = () => {
           last
           selected={() => hideDates}
         />
+      </TableSection>
+
+      <TableSection>
+        <SectionHeader title={'Editor Options'} />
+
+        <SectionedAccessoryTableCell
+          onPress={toggleNoteMonospaceFont}
+          text={'Use Monospace font'}
+          first
+          selected={() => useMonospace}
+        />
+
       </TableSection>
     </>
   );

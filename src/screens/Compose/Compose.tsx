@@ -59,6 +59,7 @@ export class Compose extends React.Component<{}, State> {
   editorViewRef: React.RefObject<SNTextView> = createRef();
   saveTimeout: number | undefined;
   alreadySaved: boolean = false;
+  useMonospaceFont: boolean = false;
   statusTimeout: number | undefined;
   downloadingMessageTimeout: number | undefined;
   removeNoteInnerValueObserver?: () => void;
@@ -75,6 +76,14 @@ export class Compose extends React.Component<{}, State> {
     super(props);
     this.context = context;
     const initialEditor = context?.editorGroup.activeNoteViewController;
+
+    //const application = useContext(ApplicationContext);
+    //const application = this.application as MobileApplication;
+    //this.useMonospaceFont  = application
+    //  ?.getLocalPreferences()
+    //  .getValue(PrefKey.NoteUseMonospace, false);
+    this.useMonospaceFont = true;
+
     this.state = {
       title: initialEditor?.note?.title ?? '',
       text: initialEditor?.note?.text ?? '',
@@ -597,6 +606,7 @@ export class Compose extends React.Component<{}, State> {
                             handlesColor={theme.stylekitInfoColor}
                             onChangeText={this.onContentChange}
                             errorState={false}
+                            monospace={this.useMonospaceFont}
                           />
                         </TextContainer>
                       )}
